@@ -1,0 +1,204 @@
+{
+  "version": "v4",
+  "description": "南京邮电大学推免/保研助手 v4 标准回归评测集。用于覆盖澄清、边界、来源、连续追问和高风险事实。",
+  "single_turn_cases": [
+    {
+      "id": "clarify_material_submission_without_college",
+      "category": "clarification",
+      "tags": ["first_turn", "missing_college", "materials"],
+      "query": "材料怎么交？",
+      "must": ["请先说明", "学院"],
+      "forbid": ["scie-yz@njupt.edu.cn", "jsjzs@njupt.edu.cn", "iammzhang@njupt.edu.cn"]
+    },
+    {
+      "id": "clarify_pronoun_phone_without_context",
+      "category": "clarification",
+      "tags": ["first_turn", "pronoun", "phone"],
+      "query": "那它的电话是多少？",
+      "must": ["请先说明", "学院"],
+      "forbid": ["025-83492075", "025-85866533", "025-83492451"]
+    },
+    {
+      "id": "clarify_batch_without_college",
+      "category": "clarification",
+      "tags": ["first_turn", "batch", "missing_college"],
+      "query": "第二批复试时间？",
+      "must": ["请先说明", "学院"],
+      "forbid": ["10月16日15:00", "计算机学院"]
+    },
+    {
+      "id": "clarify_policy_side_for_general_condition",
+      "category": "clarification",
+      "tags": ["policy_side", "ambiguous"],
+      "query": "保研条件是什么？",
+      "must": ["请先确认", "推荐端", "接收端"],
+      "forbid": ["CET-6", "申请人须获得所在学校推免资格"]
+    },
+    {
+      "id": "telecom_receiving_email",
+      "category": "answerable",
+      "tags": ["college", "email", "receiving_side"],
+      "query": "通信学院接收推免材料发到哪个邮箱？",
+      "must": ["scie-yz@njupt.edu.cn", "接收端"],
+      "forbid": ["请先说明", "请先确认", "推荐端材料提交邮箱"]
+    },
+    {
+      "id": "school_admission_office_contact",
+      "category": "answerable",
+      "tags": ["school_level", "contact"],
+      "query": "学校研招办电话和邮箱是多少？",
+      "must": ["025-83492350", "yzb@njupt.edu.cn", "接收端"],
+      "forbid": ["请先说明", "请先确认"]
+    },
+    {
+      "id": "iot_email_unstated",
+      "category": "high_risk_fact",
+      "tags": ["college", "email", "unstated"],
+      "query": "物联网学院材料提交邮箱是什么？",
+      "must": ["未明示", "iot@njupt.edu.cn", "接收端"],
+      "forbid": ["fangw@njupt.edu.cn", "参考往年"]
+    },
+    {
+      "id": "material_college_email_source",
+      "category": "high_risk_fact",
+      "tags": ["college", "email_source"],
+      "query": "材料学院材料提交邮箱是什么？",
+      "must": ["iammzhang@njupt.edu.cn", "南京邮电大学研究生招生信息网", "来源为研招网培养单位联系方式", "接收端"],
+      "forbid": ["是复试细则正文直接列出", "细则正文直接列出了", "是复试细则原文写的"]
+    },
+    {
+      "id": "recommendation_material_cannot_use_receiving_email",
+      "category": "policy_side",
+      "tags": ["recommendation_side", "receiving_side", "email"],
+      "query": "校内推荐端材料能发到通信学院那个邮箱吗？",
+      "must": ["不能", "推荐端", "接收端"],
+      "forbid": ["可以发", "可以直接发"]
+    },
+    {
+      "id": "review_on_sep_26",
+      "category": "answerable",
+      "tags": ["schedule", "multi_college"],
+      "query": "哪些学院复试在9月26日？",
+      "must": ["物联网学院", "数字媒体", "9月26日", "接收端"],
+      "forbid": ["请先说明"]
+    },
+    {
+      "id": "cannot_infer_2026_from_2025_quota",
+      "category": "truthfulness",
+      "tags": ["history", "no_inference"],
+      "query": "2025年的推免名额能不能推断2026届也差不多？",
+      "must": ["不能推断", "2025届", "2026届"],
+      "forbid": ["可以参考为2026届", "大概"]
+    },
+    {
+      "id": "competition_without_cet6",
+      "category": "recommendation_side",
+      "tags": ["english", "competition", "truthfulness"],
+      "query": "如果我没过六级，但是有竞赛奖，还能走校内推免吗？",
+      "must": ["CET-4", "425", "学校认可", "学院审核", "推荐端"],
+      "forbid": ["A/B/C类均可", "C类可满足资格", "C类竞赛可满足推免资格"]
+    },
+    {
+      "id": "system_close_no_supplement",
+      "category": "process",
+      "tags": ["system", "deadline"],
+      "query": "推免服务系统关闭后还能补报志愿吗？",
+      "must": ["不能", "10月20日", "12:00", "志愿", "接收端"],
+      "forbid": ["志原", "可以补报"]
+    },
+    {
+      "id": "missing_official_basis_meta_answer",
+      "category": "meta",
+      "tags": ["missing_basis"],
+      "query": "如果知识库里没有官方依据，你会怎么回答？",
+      "must": ["本知识库未收录明确规定", "最新官方通知"],
+      "forbid": ["系统提示", "系统规则", "内部规则"]
+    }
+  ],
+  "conversation_cases": [
+    {
+      "id": "telecom_followup_phone_and_location",
+      "category": "conversation",
+      "tags": ["context", "pronoun", "receiving_side"],
+      "turns": [
+        {
+          "query": "通信学院推免材料发到哪个邮箱？",
+          "must": ["scie-yz@njupt.edu.cn", "接收端"]
+        },
+        {
+          "query": "那它的电话是多少？",
+          "must": ["025-83492075", "通信"],
+          "forbid": ["请先说明"]
+        },
+        {
+          "query": "复试地点有写吗？",
+          "must_any": [["腾讯会议", "网络远程"]],
+          "forbid": ["请先说明"]
+        }
+      ]
+    },
+    {
+      "id": "material_email_source_followup",
+      "category": "conversation",
+      "tags": ["context", "email_source"],
+      "turns": [
+        {
+          "query": "材料学院材料提交邮箱是什么？",
+          "must": ["iammzhang@njupt.edu.cn", "南京邮电大学研究生招生信息网"]
+        },
+        {
+          "query": "张老师电话也给我",
+          "must": ["025-85866533", "张老师"],
+          "forbid": ["请先说明"]
+        },
+        {
+          "query": "这个邮箱是复试细则原文直接写的吗？",
+          "must": ["不是", "南京邮电大学研究生招生信息网", "来源为研招网培养单位联系方式"],
+          "forbid": ["是的", "是复试细则正文直接列出", "细则正文直接列出了"]
+        }
+      ]
+    },
+    {
+      "id": "computer_batch_followup",
+      "category": "conversation",
+      "tags": ["context", "batch", "materials"],
+      "turns": [
+        {
+          "query": "计算机学院第二批复试时间？",
+          "must": ["10月16日", "15:00", "接收端"]
+        },
+        {
+          "query": "第一批呢？",
+          "must": ["9月24日", "8:30"],
+          "forbid": ["请先说明"]
+        },
+        {
+          "query": "材料要怎么交？",
+          "must": ["jsjzs@njupt.edu.cn", "姓名+学校"],
+          "forbid": ["请先说明"]
+        }
+      ]
+    },
+    {
+      "id": "switch_from_receiving_to_recommendation",
+      "category": "conversation",
+      "tags": ["policy_side", "context_correction"],
+      "turns": [
+        {
+          "query": "通信学院材料提交邮箱是什么？",
+          "must": ["scie-yz@njupt.edu.cn"]
+        },
+        {
+          "query": "我问的是校内保研资格，不是接收端材料",
+          "must": ["推荐端"],
+          "forbid": ["scie-yz@njupt.edu.cn"]
+        },
+        {
+          "query": "英语是不是必须六级425？",
+          "must": ["CET-6", "CET-4", "推荐端"],
+          "forbid": ["scie-yz@njupt.edu.cn", "请先确认"]
+        }
+      ]
+    }
+  ]
+}

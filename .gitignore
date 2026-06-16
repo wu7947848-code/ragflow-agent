@@ -1,0 +1,25 @@
+# 数据目录
+raw_data/
+原始PDF/
+__pycache__/
+eval_logs/
+dify_ready_payload/
+dify_ready_payload_v2/
+dify_clean_payload/
+ragflow_ready_payload_v1/
+ragflow_ready_payload_v2/
+ragflow_ready_payload_v3/
+ragflow_ready_payload_v4/
+ragflow_trial_payload/
+ragflow_trial_payload_ascii/
+
+# 数据文件
+dify_ready_payload.zip
+dify_api_broad_test_results.json
+正式会议议程_A4.png
+正式会议议程_A4_满版.png
+dify_ready_payload_field_index.md
+dify_ready_payload_single.md
+dify_ready_payload_single_compatible.md
+dify_ready_payload_single_enhanced.md
+dify_perfect_payload.zip
